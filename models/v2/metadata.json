@@ -1,0 +1,44 @@
+{
+  "model_version": "v2",
+  "trained_at": "2026-09-14T15:47:09.454775+00:00",
+  "dataset_name": "CIC-Bell-DNS-EXF-2021",
+  "training_samples": 120000,
+  "test_samples": 30000,
+  "feature_count": 14,
+  "feature_names": [
+    "FQDN_count",
+    "subdomain_length",
+    "upper",
+    "lower",
+    "numeric",
+    "entropy",
+    "special",
+    "labels",
+    "labels_max",
+    "labels_average",
+    "longest_word_len",
+    "sld_len",
+    "len",
+    "subdomain"
+  ],
+  "metrics": {
+    "accuracy": 0.7524666666666666,
+    "precision": 0.6110761485210825,
+    "recall": 0.9991425141485165,
+    "f1_score": 0.7583468922876668,
+    "confusion_matrix": [
+      [
+        10922,
+        7416
+      ],
+      [
+        10,
+        11652
+      ]
+    ]
+  },
+  "isolation_forest_config": {
+    "score_min": -0.7169536471133584,
+    "score_max": -0.39708554986800887
+  }
+}

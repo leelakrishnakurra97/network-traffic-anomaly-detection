@@ -1,0 +1,108 @@
+{
+  "model_version": "v1",
+  "trained_at": "2026-09-14T15:12:44.198584+00:00",
+  "dataset_name": "CIC-Bell-DNS-EXF-2021",
+  "dataset_location": "archive",
+  "total_source_rows": 757211,
+  "training_samples": 120000,
+  "test_samples": 30000,
+  "feature_count": 14,
+  "feature_names": [
+    "FQDN_count",
+    "subdomain_length",
+    "upper",
+    "lower",
+    "numeric",
+    "entropy",
+    "special",
+    "labels",
+    "labels_max",
+    "labels_average",
+    "longest_word_len",
+    "sld_len",
+    "len",
+    "subdomain"
+  ],
+  "target_definition": {
+    "0": "Benign",
+    "1": "Attack (DNS Exfiltration / Tunneling)"
+  },
+  "class_distribution": {
+    "total_benign": 462858,
+    "total_attack": 294353,
+    "train_benign": 73352,
+    "train_attack": 46648,
+    "test_benign": 18338,
+    "test_attack": 11662
+  },
+  "metrics": {
+    "accuracy": 0.7524666666666666,
+    "precision": 0.6110761485210825,
+    "recall": 0.9991425141485165,
+    "f1_score": 0.7583468922876668,
+    "confusion_matrix": [
+      [
+        10922,
+        7416
+      ],
+      [
+        10,
+        11652
+      ]
+    ],
+    "classification_report": {
+      "Benign": {
+        "precision": 0.9990852542993048,
+        "recall": 0.5955938488384774,
+        "f1-score": 0.7462931329005807,
+        "support": 18338.0
+      },
+      "Attack": {
+        "precision": 0.6110761485210825,
+        "recall": 0.9991425141485165,
+        "f1-score": 0.7583468922876668,
+        "support": 11662.0
+      },
+      "accuracy": 0.7524666666666666,
+      "macro avg": {
+        "precision": 0.8050807014101937,
+        "recall": 0.797368181493497,
+        "f1-score": 0.7523200125941238,
+        "support": 30000.0
+      },
+      "weighted avg": {
+        "precision": 0.8482531812464505,
+        "recall": 0.7524666666666666,
+        "f1-score": 0.7509788309663207,
+        "support": 30000.0
+      }
+    }
+  },
+  "feature_importance": {
+    "FQDN_count": 0.24586093742807413,
+    "labels": 0.18655645201520216,
+    "subdomain_length": 0.13836873293481677,
+    "special": 0.13064647936974075,
+    "sld_len": 0.09072854275529087,
+    "numeric": 0.0540576555998637,
+    "labels_average": 0.04370878226943895,
+    "lower": 0.03816201679723246,
+    "subdomain": 0.021061077377382387,
+    "upper": 0.016321841663911627,
+    "len": 0.01325805886812432,
+    "entropy": 0.008384205951874413,
+    "longest_word_len": 0.007756259017076507,
+    "labels_max": 0.0051289579519710376
+  },
+  "isolation_forest_config": {
+    "baseline_training_samples": 73352,
+    "score_min": -0.718007815664569,
+    "score_max": -0.38800486670135853
+  },
+  "timing": {
+    "rf_train_seconds": 1.7694051265716553,
+    "if_train_seconds": 0.4428260326385498,
+    "eval_seconds": 0.20779156684875488
+  },
+  "status": "active"
+}
