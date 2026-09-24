@@ -117,10 +117,10 @@ $$\text{Risk Score} = \text{round}\left(100 \times \left(0.55 \cdot P_{\text{RF}
 ### Backend Setup
 ```bash
 # 1. Navigate to project root
-cd CN_FINAL
+cd network-traffic-anomaly-detection
 
 # 2. Install backend Python dependencies
-pip install -r backend/requirements.txt
+pip install -r requirements.txt
 
 # 3. Explore archive and verify dataset integrity
 python scripts/explore_dataset.py

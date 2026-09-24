@@ -43,57 +43,79 @@
 ```
 CN_FINAL/
 │
-├── archive/                   # Canonical CIC-Bell-DNS-EXF-2021 Dataset (Read-only)
+├── archive/                        # CIC-Bell-DNS-EXF-2021 Dataset (Read-only)
 │   ├── Benign/
 │   ├── Attack_Light_Benign/
 │   └── Attack_heavy_Benign/
 │
-├── backend/                   # FastAPI Backend
+├── backend/                        # FastAPI Backend
 │   ├── app/
-│   │   ├── main.py            # Entrypoint, CORS, Lifespan initialization
-│   │   ├── api/               # API routes (auth, analysis, admin)
-│   │   ├── auth/              # JWT token handling, bcrypt password hashing, deps
-│   │   ├── database/          # SQLAlchemy session, ORM models (User, Analysis, ModelVersion)
-│   │   ├── dns/               # High-speed native & Scapy PCAP DNS feature extractor
-│   │   ├── ml/                # ModelManager, RuleEngine, RiskScorer
-│   │   └── schemas/           # Pydantic v2 data models
+│   │   ├── main.py                 # Entrypoint, CORS, Lifespan initialization
+│   │   ├── api/                    # Route handlers (auth, analysis, admin)
+│   │   │   ├── auth_routes.py
+│   │   │   ├── analysis_routes.py
+│   │   │   └── admin_routes.py
+│   │   ├── auth/                   # JWT token handling, bcrypt, dependency injection
+│   │   ├── database/               # SQLAlchemy session, ORM models (User, Analysis, ModelVersion)
+│   │   ├── dns/                    # Native binary + Scapy PCAP parser & DNS feature extractor
+│   │   ├── ml/                     # ModelManager, RuleEngine, RiskScorer
+│   │   └── schemas/                # Pydantic v2 request/response schemas
 │   ├── requirements.txt
+│   ├── .env.example
+│   └── tests/                      # Pytest unit & integration tests
+│
+├── frontend/                       # React 18 + Vite 5 + Tailwind CSS 3
+│   ├── src/
+│   │   ├── App.jsx                 # React Router setup
+│   │   ├── main.jsx                # Vite entry point
+│   │   ├── index.css               # Global styles + Tailwind directives
+│   │   ├── components/             # Navbar, Footer, RiskGauge, ProtectedRoute, etc.
+│   │   ├── pages/                  # LandingPage, LoginPage, RegisterPage, UserDashboardPage,
+│   │   │                           # PcapUploadPage, AnalysisResultPage, AnalysisHistoryPage,
+│   │   │                           # AdminDashboardPage, AdminModelsPage, AdminTrainingPage
+│   │   ├── services/               # api.js — Axios instance with JWT interceptors
+│   │   └── context/                # AuthContext.jsx — global auth state
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── tailwind.config.js
 │   └── .env.example
 │
-├── frontend/                  # React + Vite + Tailwind CSS Frontend
-│   ├── src/
-│   │   ├── components/        # Navbar, Footer, RiskGauge, ProtectedRoute
-│   │   ├── pages/             # Landing, Login, Register, Dashboard, Upload, Result, History, Admin
-│   │   ├── services/          # Axios client with JWT interceptors
-│   │   ├── context/           # AuthContext (state & tokens)
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── package.json
-│   └── vite.config.js
-│
-├── models/                    # Model Version Artifacts
-│   ├── v1/                    # Active baseline model
+├── models/                         # Trained ML Model Artifacts
+│   ├── active_version.json         # Controls which model loads at runtime
+│   ├── v1/                         # Baseline model (99.91% recall)
 │   │   ├── random_forest.joblib
 │   │   ├── isolation_forest.joblib
 │   │   └── metadata.json
-│   └── active_version.json
+│   └── v2/                         # Second model version
+│       ├── random_forest.joblib
+│       ├── isolation_forest.joblib
+│       └── metadata.json
 │
-├── scripts/                   # Data Exploration & ML Training
-│   ├── explore_dataset.py     # Inspects archive/ and writes docs/dataset_exploration.md
-│   ├── prepare_dataset.py     # Clean dataset, engineer features, create train/test split
-│   ├── train_model.py         # Train RF + IF, evaluate real metrics, save models
-│   └── evaluate_model.py      # Standalone model validation script
+├── scripts/                        # Data Exploration & ML Training Utilities
+│   ├── explore_dataset.py          # Inspect archive/, write docs/dataset_exploration.md
+│   ├── prepare_dataset.py          # Feature engineering + train/test split → data/
+│   ├── train_model.py              # Train RF + IF, save to models/vN/
+│   ├── evaluate_model.py           # Standalone model evaluation
+│   ├── validate_len_formula.py     # Validates `len` feature formula consistency
+│   └── test_pcapng_wireshark.py    # PCAPNG format compatibility tests
 │
-├── docs/                      # Architectural & Dataset Reports
-│   ├── dataset_exploration.md
-│   ├── DATASET.md
-│   ├── ML_PIPELINE.md
-│   └── ARCHITECTURE.md
+├── docs/                           # Project Documentation
+│   ├── PRD.md                      # Product requirements & user stories
+│   ├── ARCHITECTURE.md             # THIS FILE — system design & DB schema
+│   ├── DESIGN.md                   # UI/UX design system & color palette
+│   ├── RULES.md                    # Coding standards & development rules
+│   ├── TASKS.md                    # Task breakdown & progress tracker
+│   ├── MEMORY.md                   # AI context snapshot (project memory)
+│   ├── DATASET.md                  # Dataset facts & class balance statistics
+│   ├── ML_PIPELINE.md              # ML training pipeline documentation
+│   └── dataset_exploration.md      # Auto-generated dataset exploration report
 │
-├── uploads/                   # Upload storage & synthetic sample PCAPs
-├── netsentinel.db             # Local SQLite database (or Postgres in prod)
-├── pytest.ini
-└── README.md
+├── data/                           # Processed train/test splits (auto-generated by scripts)
+├── uploads/                        # Uploaded PCAP files (auto-created at runtime)
+├── netsentinel.db                  # SQLite database (auto-created on first run)
+├── pytest.ini                      # Pytest configuration
+├── requirements.txt                # Python dependencies entrypoint
+└── README.md                       # Project overview + quickstart guide
 ```
 
 ---

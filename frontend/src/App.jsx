@@ -9,7 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import UserDashboard from './pages/UserDashboard';
+import UserDashboardPage from './pages/UserDashboardPage';
 import PcapUploadPage from './pages/PcapUploadPage';
 import AnalysisResultPage from './pages/AnalysisResultPage';
 import AnalysisHistoryPage from './pages/AnalysisHistoryPage';
@@ -35,7 +35,7 @@ export default function App() {
                 path="/dashboard"
                 element={
                   <ProtectedRoute>
-                    <UserDashboard />
+                    <UserDashboardPage />
                   </ProtectedRoute>
                 }
               />

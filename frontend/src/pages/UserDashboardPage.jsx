@@ -158,7 +158,7 @@ function RiskDistribution({ analyses }) {
 }
 
 // ─── Main Dashboard ───────────────────────────────────────────────────────────
-export default function UserDashboard() {
+export default function UserDashboardPage() {
   const { user } = useAuth();
   const [stats,      setStats]      = useState(null);
   const [allHistory, setAllHistory] = useState([]);

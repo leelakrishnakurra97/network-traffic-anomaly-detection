@@ -1,55 +1,65 @@
-# Python
+# =============================================================
+# NetSentinel — .gitignore
+# =============================================================
+
+# ─── Python ───────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-.Python
 *.egg
 *.egg-info/
-dist/
 build/
 .eggs/
-.env
-.venv
-env/
-venv/
-ENV/
+.Python
 pip-selfcheck.json
 
-# Pytest
-.pytest_cache/
-.coverage
-htmlcov/
+# ─── Virtual Environments ─────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
 
-# Node / Frontend
-frontend/node_modules/
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.npm
-
-# Database
-*.db
-*.sqlite3
-
-# Uploads (runtime files)
-uploads/
-
-# IDE / OS
-.vscode/
-.idea/
-*.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-
-# Environment variables
+# ─── Environment Variables (secrets) ─────────────────────────
 .env
 .env.local
 .env.*.local
 
-# Models (large binary files - optional, remove if you want to push them)
-# models/*.pkl
-# models/*.joblib
+# ─── Pytest & Coverage ────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ─── Node / Frontend ──────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+frontend/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+*.timestamp-*.mjs
+vite.config.*.timestamp*
+
+# ─── Database ─────────────────────────────────────────────────
+*.db
+*.sqlite3
+
+# ─── Runtime Directories (auto-created at startup) ────────────
+# Runtime user uploads are ignored, but .gitkeep keeps the folder tracked
+uploads/user_uploads/*
+!uploads/user_uploads/.gitkeep
+
+# ─── IDE / OS ─────────────────────────────────────────────────
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Logs ─────────────────────────────────────────────────────
+*.log
+
+# ─── Model Binaries (tracked intentionally — remove lines below to exclude) ───
+# models/**/*.joblib
+# models/**/*.pkl
