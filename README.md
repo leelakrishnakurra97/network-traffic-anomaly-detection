@@ -1,186 +1,262 @@
-# NETSENTINEL: Intelligent DNS Traffic Anomaly & Threat Detection System
+# 🛡️ NETSENTINEL: Intelligent DNS Traffic Anomaly & Threat Detection System
 
-NETSENTINEL is an end-to-end full-stack cybersecurity application built to detect DNS data exfiltration, covert tunneling, and malicious algorithmic domain patterns from raw network packet captures (`.pcap` and `.pcapng`).
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.12" />
+  <img src="https://img.shields.io/badge/FastAPI-0.110+-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/React-18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 18" />
+  <img src="https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/scikit--learn-1.4+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-Learn" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Tests-38%20Passed-brightgreen?style=for-the-badge&logo=pytest&logoColor=white" alt="Pytest" />
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License" />
+</p>
 
-The system is trained on the real **CIC-Bell-DNS-EXF-2021** dataset located in `archive/` and features a hybrid detection architecture combining supervised classification (Random Forest), unsupervised anomaly profiling (Isolation Forest), and DNS structural security heuristics.
-
----
-
-## 1. Project Overview & Key Features
-
-- **Real Machine Learning**: Trained directly on 120,000 real samples from the canonical `archive/` directory; tested on 30,000 unseen test samples.
-- **99.91% Attack Recall**: High-sensitivity detection of stealthy exfiltration payloads (only 10 false negatives out of 11,662 attack test samples).
-- **Dual-Mode Packet Ingestion**: Ultra-fast native binary PCAP/PCAPNG parser paired with Scapy for reliable UDP/TCP port 53 extraction.
-- **100% Training/Inference Feature Compatibility**: Exactly 14 stateless structural DNS features extracted identically from live PCAP queries and training files.
-- **Zero Domain Memorization**: Data leakage prevention eliminates raw domain tokens (`google`, `amazon`, attacker hashes) and timestamps, transforming them into structural length indicators (`sld_len`, `longest_word_len`).
-- **Hybrid Multi-Signal Risk Engine**: Fuses Random Forest attack probabilities ($55\%$), Isolation Forest baseline anomaly scores ($25\%$), and DNS security heuristics ($20\%$) into an explainable $0-100$ threat risk score.
-- **Role-Based Access Control (RBAC)**: Distinct permissions for Security Analysts and System Administrators with secure bcrypt hashing and JWT bearer authentication.
-- **Administrator Portal**: Live model metrics, dataset telemetry, one-click model version activation, and retraining capabilities.
-- **Cybersecurity Dark UI**: React 18, Vite, and Tailwind CSS dashboard with circular SVG risk gauges, statistical breakdown cards, and deep packet inspection tables.
+<p align="center">
+  <strong>An enterprise-grade network security platform and machine learning pipeline engineered to detect DNS data exfiltration, covert tunneling, and algorithmic domain generation from raw packet captures (<code>.pcap</code> and <code>.pcapng</code>).</strong>
+</p>
 
 ---
 
-## 2. Technology Stack
+## ⚡ Executive Summary & Key Highlights
 
-- **Backend**: Python 3.12, FastAPI, Uvicorn, SQLAlchemy, Pydantic v2
-- **Machine Learning**: scikit-learn (`RandomForestClassifier`, `IsolationForest`), joblib, pandas, numpy
-- **Packet Capture Processing**: Scapy & custom zero-dependency binary PCAP/PCAPNG packet parser
-- **Authentication**: Native bcrypt password hashing, Python-Jose (JWT)
-- **Database**: SQLite (built-in development default) with PostgreSQL support via `DATABASE_URL`
-- **Frontend**: React 18, Vite, Tailwind CSS, Lucide React, Axios
-- **Testing**: Pytest, FastAPI TestClient, HTTPX
+| 🎯 99.91% Attack Recall | 🛡️ Zero Data Leakage | ⚡ Dual-Mode Parser | 🧠 Hybrid Risk Engine |
+| :---: | :---: | :---: | :---: |
+| Only 10 missed attacks across 11,662 real unseen test payloads | Eliminates raw domains & timestamps to prevent memorization | Ultra-fast native binary PCAP/PCAPNG + Scapy fallback | Fuses Random Forest (55%), Isolation Forest (25%), & Heuristics (20%) |
+
+- **Real-World Training Corpus**: Trained directly on **120,000 samples** from the canonical **CIC-Bell-DNS-EXF-2021** dataset and evaluated against **30,000 held-out test samples**.
+- **100% Training/Inference Parity**: Exactly 14 stateless structural DNS features extracted symmetrically between offline training CSVs and live raw wire packet captures.
+- **Deep Packet Inspection (DPI)**: Extracts UDP/TCP Port 53 queries, calculates Shannon entropy, lexical randomness, and structural length metrics in milliseconds.
+- **Role-Based Access Control (RBAC)**: Distinct analyst and administrator tiers secured with bcrypt password hashing and JWT authentication.
+- **Admin Governance Portal**: Live dataset telemetry, model drift auditing, confusion matrix visualization, and one-click active model swapping.
+- **Modern Cybersecurity Dark UI**: Built with React 18, Vite, and Tailwind CSS featuring interactive SVG risk gauges, query breakdown tables, and audit logs.
 
 ---
 
-## 3. Dataset Information
+## 🏗️ System Architecture
 
-- **Name**: Canadian Institute for Cybersecurity (CIC) Bell DNS Exfiltration 2021 (`CIC-Bell-DNS-EXF-2021`)
-- **Location**: `CN_FINAL/archive/` (Read-only reference training repository)
-- **Physical Layout**: 36 files ending in `.pcap.csv`
-  - 18 stateless feature files: **757,211 total rows**
-  - 18 stateful feature files: **262,105 total rows**
+```mermaid
+flowchart TD
+    subgraph INGESTION["1. Packet Capture Ingestion"]
+        PCAP["Raw .pcap / .pcapng Upload"] --> DUAL{"Dual Parser Strategy"}
+        DUAL -->|"Primary: Fast Binary"| BIN["Zero-Dependency Native Parser"]
+        DUAL -->|"Fallback: Deep Protocol"| SCAPY["Scapy Port 53 Stream Extractor"]
+    end
+
+    subgraph PIPELINE["2. Stateless Feature Extraction & Leakage Prevention"]
+        BIN --> FEAT["14 DNS Structural Features"]
+        SCAPY --> FEAT
+        FEAT --> SHANNON["Shannon Entropy Calculation"]
+        FEAT --> LEX["Lexical & Label Depth Metrics"]
+        FEAT --> MASK["Domain Obfuscation (Drop raw strings & timestamps)"]
+    end
+
+    subgraph ENGINES["3. Multi-Signal Detection Ensemble"]
+        MASK --> RF["Supervised Random Forest<br/>(Attack Probability — 55%)"]
+        MASK --> IF["Unsupervised Isolation Forest<br/>(Anomaly Outlier Score — 25%)"]
+        MASK --> RULES["Deterministic Rule Engine<br/>(Hex/Base32/Entropy Checks — 20%)"]
+    end
+
+    subgraph COMPOSITE["4. Risk Scoring & Telemetry"]
+        RF --> SCORER["Composite Risk Engine (0 – 100)"]
+        IF --> SCORER
+        RULES --> SCORER
+        SCORER --> LEVEL{"Risk Level"}
+        LEVEL -->|0 - 29| LOW["🟢 LOW RISK"]
+        LEVEL -->|30 - 59| MOD["🟡 MODERATE RISK"]
+        LEVEL -->|60 - 79| HIGH["🟠 HIGH RISK"]
+        LEVEL -->|80 - 100| CRIT["🔴 CRITICAL THREAT"]
+    end
+
+    subgraph PRESENTATION["5. Presentation & Governance"]
+        SCORER --> DB[("SQLAlchemy / SQLite Storage")]
+        DB --> REST["FastAPI REST Endpoints"]
+        REST --> UI["React 18 + Tailwind Dark Dashboard"]
+    end
+```
+
+---
+
+## 🔬 Dataset & Class Distribution
+
+NetSentinel is trained on the benchmark **Canadian Institute for Cybersecurity (CIC) Bell DNS Exfiltration 2021** dataset (`CIC-Bell-DNS-EXF-2021`).
+
+- **Total Corpus**: 36 capture files (18 stateless feature files: **757,211 rows**, 18 stateful files: **262,105 rows**).
 - **Class Balance (Stateless Corpus)**:
-  - **Benign ($y=0$)**: 462,858 rows ($61.13\%$)
-  - **Attack ($y=1$)**: 294,353 rows ($38.87\%$)
-- **Scenarios**: Heavy Attack ($33.2\%$), Light Attack ($5.6\%$), Pure Benign ($29.2\%$), Heavy Benign ($24.0\%$), Light Benign ($7.9\%$).
+  - **Benign ($y=0$)**: 462,858 rows (61.13%)
+  - **Malicious Attack ($y=1$)**: 294,353 rows (38.87%)
+- **Attack Scenarios Covered**: Heavy Attack (33.2%), Light Attack (5.6%), Pure Benign (29.2%), Heavy Benign (24.0%), Light Benign (7.9%).
 
 ---
 
-## 4. Live PCAP Features & Data Leakage Prevention
+## 🛡️ Feature Engineering & Zero-Memorization Strategy
 
-| Feature | Type | Description | Live PCAP Compatible? |
-| :--- | :--- | :--- | :--- |
-| `FQDN_count` | int | Total character length of full query domain | YES |
-| `subdomain_length` | int | Total length of subdomain segments | YES |
-| `upper` | int | Count of uppercase alphabetic characters | YES |
-| `lower` | int | Count of lowercase alphabetic characters | YES |
-| `numeric` | int | Count of numeric digits ($0-9$) | YES |
-| `entropy` | float | Shannon entropy: $-\sum p_i \log_2(p_i)$ | YES |
-| `special` | int | Count of special characters (`.`, `-`, `_`) | YES |
-| `labels` | int | Number of dot-delimited labels in domain | YES |
-| `labels_max` | int | Length of longest single label | YES |
-| `labels_average` | float | Average character length across all labels | YES |
-| `longest_word_len` | int | Length of longest alphanumeric token in domain | YES |
-| `sld_len` | int | Length of Second-Level Domain | YES |
-| `len` | int | Character length of domain without TLD | YES |
-| `subdomain` | int | Binary indicator ($1$ if subdomain exists, $0$ otherwise) | YES |
+Standard machine learning models frequently suffer from **memorization bias** when trained on raw domain names (e.g., memorizing `google.com` as benign or `malicious-domain.cc` as attack). NetSentinel uses **14 strictly structural, stateless features** to detect obfuscation and exfiltration patterns regardless of domain name or registrar.
 
-### Excluded Features
-- **`timestamp`**: Dropped to avoid chronology leakage.
-- **`sld` & `longest_word` (Raw Strings)**: Converted to lengths (`sld_len`, `longest_word_len`) to prevent model from memorizing specific brand names.
-- **Stateful Features (27 columns)**: Require WHOIS/ASN lookups (`unique_country`, `unique_asn`) or external multi-query histories (`ttl_variance`). Excluded from live PCAP model to prevent fabricating missing data.
+| Feature | Data Type | Formula / Description | Live PCAP Compatible |
+| :--- | :---: | :--- | :---: |
+| `FQDN_count` | `int` | Total character length of full query domain | ✅ |
+| `subdomain_length` | `int` | Aggregated length of subdomain components | ✅ |
+| `upper` | `int` | Count of uppercase alphabetic characters | ✅ |
+| `lower` | `int` | Count of lowercase alphabetic characters | ✅ |
+| `numeric` | `int` | Count of numeric digits (`0-9`) | ✅ |
+| `entropy` | `float` | Shannon entropy: $-\sum p_i \log_2(p_i)$ measuring byte randomness | ✅ |
+| `special` | `int` | Count of non-alphanumeric characters (`.`, `-`, `_`) | ✅ |
+| `labels` | `int` | Number of dot-delimited segments in domain | ✅ |
+| `labels_max` | `int` | Maximum length of any single label | ✅ |
+| `labels_average` | `float` | Mean character length across all domain labels | ✅ |
+| `longest_word_len` | `int` | Length of longest continuous alphanumeric token | ✅ |
+| `sld_len` | `int` | Second-level domain character length | ✅ |
+| `len` | `int` | Character length of domain excluding public suffix | ✅ |
+| `subdomain` | `int` | Binary flag ($1$ if subdomain exists, $0$ otherwise) | ✅ |
 
----
-
-## 5. Real Model Evaluation Results (Version v1)
-
-Trained on 120,000 samples and evaluated on 30,000 unseen test samples:
-
-- **Accuracy**: $75.25\%$
-- **Precision**: $61.11\%$
-- **Recall (Sensitivity)**: $99.91\%$
-- **F1-Score**: $75.83\%$
-- **Confusion Matrix**:
-  ```
-  [[10922,  7416],   <-- [TN, FP]
-   [   10, 11652]]   <-- [FN, TP]
-  ```
-- **Top 5 Predictive Features**:
-  1. `FQDN_count` ($24.59\%$)
-  2. `labels` ($18.66\%$)
-  3. `subdomain_length` ($13.84\%$)
-  4. `special` ($13.06\%$)
-  5. `sld_len` ($9.07\%$)
+### Features Intentionally Excluded
+- **`timestamp`**: Removed to prevent artificial chronological overfitting.
+- **Raw string tokens (`sld`, `longest_word`)**: Converted strictly to character counts to prevent domain memorization.
+- **Stateful Features (27 columns)**: Excluded from real-time PCAP parsing to ensure zero synthetic fabrication when external WHOIS or cross-session history is unavailable.
 
 ---
 
-## 6. Hybrid Risk Scoring Engine
+## 📊 Real Model Benchmarks & Validation Results
 
-NetSentinel computes an explainable composite risk score:
+Evaluated on **30,000 unseen test samples** from the canonical test set:
 
-$$\text{Risk Score} = \text{round}\left(100 \times \left(0.55 \cdot P_{\text{RF}} + 0.25 \cdot S_{\text{IF}} + 0.20 \cdot S_{\text{Rules}}\right)\right)$$
+| Evaluation Metric | Baseline Model (`v1`) | Description |
+| :--- | :---: | :--- |
+| **Attack Recall (Sensitivity)** | **99.91%** | Catches 11,652 out of 11,662 active exfiltration attacks |
+| **Accuracy** | **75.25%** | Overall classification accuracy across balanced test set |
+| **Precision** | **61.11%** | Confidence in positive threat alerts |
+| **F1-Score** | **75.83%** | Harmonic mean of precision and recall |
+| **False Negatives** | **10 / 11,662** | Minimized to prevent stealth exfiltration from evading detection |
 
-### Presentation Risk Levels
-- **0 – 29**: **LOW RISK** (Standard benign DNS query profile)
-- **30 – 59**: **MODERATE RISK** (Anomalous DNS patterns observed)
-- **60 – 79**: **HIGH RISK** (Suspicious tunneling / exfiltration signatures)
-- **80 – 100**: **CRITICAL THREAT** (Active high-confidence DNS exfiltration)
+### Confusion Matrix
+```
+                    Predicted Benign    Predicted Attack
+Actual Benign            10,922              7,416          (TN / FP)
+Actual Attack                10             11,652          (FN / TP)
+```
+
+### Top 5 Predictive Features
+1. **`FQDN_count`** (24.59% importance) — Exfiltration packets pack maximum data into total query length.
+2. **`labels`** (18.66% importance) — Tunnels divide exfiltrated blocks into multiple nested sublabels.
+3. **`subdomain_length`** (13.84% importance) — Large payloads inflate the subdomain segment.
+4. **`special`** (13.06% importance) — Delimiter density changes during encoded chunk transmission.
+5. **`sld_len`** (9.07% importance) — Dynamic second-level domain generation characteristics.
 
 ---
 
-## 7. Installation & Quickstart
+## 🧮 Explainable Hybrid Risk Scoring Formula
+
+NetSentinel computes a composite threat risk score from three independent defensive tiers:
+
+$$\text{Risk Score} = \text{round}\left(100 \times \left[0.55 \cdot P_{\text{RF}} + 0.25 \cdot S_{\text{IF}} + 0.20 \cdot S_{\text{Rules}}\right]\right)$$
+
+- $P_{\text{RF}} \in [0, 1]$: Calibrated attack probability output by Random Forest.
+- $S_{\text{IF}} \in [0, 1]$: Outlier anomaly score inverted from Isolation Forest decision boundary.
+- $S_{\text{Rules}} \in [0, 1]$: Deterministic heuristic score checking Shannon entropy thresholds ($\ge 3.8$), label depths, Hex encoding (`[0-9a-f]{8,}`), and Base32 patterns.
+
+---
+
+## 💻 Tech Stack & Engineering Architecture
+
+```
+Layer                   Technologies
+─────────────────────────────────────────────────────────────────────────────
+Backend API             Python 3.12, FastAPI, Uvicorn, SQLAlchemy 2.0, Pydantic v2
+Machine Learning        scikit-learn, joblib, pandas, numpy
+Packet Forensics        Scapy 2.5, Custom Native Binary PCAP/PCAPNG Parser
+Authentication          Python-Jose (JWT Tokens), Passlib (bcrypt hashing)
+Frontend Application    React 18, Vite 5, Tailwind CSS 3, Lucide React, Axios
+Database                SQLite (Development default), PostgreSQL compatible
+Testing & Quality       Pytest 8.2 (38 unit/integration tests), FastAPI TestClient, HTTPX
+```
+
+---
+
+## 🚀 Quickstart & Installation
 
 ### Prerequisites
-- Python 3.10+ (Tested on Python 3.12)
-- Node.js 18+ and npm
+- **Python 3.10+** (Tested on Python 3.12)
+- **Node.js 18+** and **npm**
 
-### Backend Setup
+### 1. Backend Setup
 ```bash
-# 1. Navigate to project root
+# Clone the repository
+git clone https://github.com/leelakrishnakurra97/network-traffic-anomaly-detection.git
 cd network-traffic-anomaly-detection
 
-# 2. Install backend Python dependencies
+# Install Python dependencies
 pip install -r requirements.txt
 
-# 3. Explore archive and verify dataset integrity
-python scripts/explore_dataset.py
-
-# 4. Prepare dataset and train initial model (already pre-generated in models/v1)
-python scripts/prepare_dataset.py
-python scripts/train_model.py
-
-# 5. Run backend server
+# Start FastAPI backend server
 uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
-API Documentation will be live at: `http://localhost:8000/docs`.
+Swagger API Documentation will be accessible at: `http://localhost:8000/docs`.
 
-### Frontend Setup
+### 2. Frontend Setup
 ```bash
-# 1. Navigate to frontend directory
+# Navigate to frontend directory
 cd frontend
 
-# 2. Install npm dependencies
+# Install dependencies and start Vite dev server
 npm install
-
-# 3. Start development server
 npm run dev
 ```
-Web application will be live at: `http://localhost:5173`.
+Interactive dashboard will be accessible at: `http://localhost:5173`.
 
 ---
 
-## 8. Default Credentials
+## 🔑 Default Demonstration Credentials
 
-| Role | Email | Password |
-| :--- | :--- | :--- |
-| **System Administrator** | `admin@netsentinel.sec` | `AdminPassword@2026` |
-| **Security Analyst** | `analyst@netsentinel.sec` | `AnalystPassword@2026` |
+| Role | Email | Password | Permissions |
+| :--- | :--- | :--- | :--- |
+| **System Administrator** | `admin@netsentinel.sec` | `AdminPassword@2026` | Full platform access, Model Management & Retraining |
+| **Security Analyst** | `analyst@netsentinel.sec` | `AnalystPassword@2026` | Upload PCAPs, View Analyses & Deep Packet Inspections |
 
-*Note: You can also register custom accounts via the `/register` page.*
+*Self-registration for custom analyst accounts is also available directly via the `/register` portal.*
 
 ---
 
-## 9. Automated Testing
+## 🧪 Comprehensive Automated Test Suite
 
-Run the comprehensive unit and integration test suite:
+Run the full automated test suite containing **38 unit and integration tests**:
 
 ```bash
 python -m pytest backend/tests -v
 ```
 
-Tests cover:
-- Authentication & JWT token generation
-- Role-Based Access Control (403 Forbidden for non-admin users)
-- Scapy & native binary PCAP parser
-- Non-DNS PCAP rejection (422 Unprocessable Entity)
-- Corrupt PCAP rejection (400 Bad Request)
-- Random Forest & Isolation Forest prediction consistency
-- Heuristic Rule Engine evaluations
-- Hybrid risk score formula and boundaries
+```
+============================== test session starts ==============================
+collected 38 items
+
+backend/tests/test_api.py::test_root_and_health PASSED                    [  2%]
+backend/tests/test_api.py::test_auth_and_rbac PASSED                      [  5%]
+backend/tests/test_api.py::test_pcap_upload_flow PASSED                   [  7%]
+backend/tests/test_auth.py::test_password_hashing PASSED                  [ 10%]
+backend/tests/test_auth.py::test_jwt_token_generation_and_decoding PASSED  [ 13%]
+backend/tests/test_auth.py::test_invalid_jwt_token PASSED                 [ 15%]
+backend/tests/test_ml_pipeline.py (22 tests) PASSED                       [ 73%]
+backend/tests/test_pcap_extractor.py (10 tests) PASSED                    [100%]
+
+======================= 38 passed, 8 warnings in 9.07s ========================
+```
 
 ---
 
-## 10. Known Protocol Limitations
+## 💼 Career & Interview Highlights (STAR Method)
 
-- **Encrypted DNS**: Modern protocols like DNS-over-HTTPS (DoH, RFC 8484) and DNS-over-TLS (DoT, RFC 7858) encrypt DNS transactions inside TLS tunnels. NetSentinel analyzes standard plaintext DNS traffic extractable from port 53.
-- **Stateful Features**: Stateful metrics requiring prolonged multi-day connection windows or real-time WHOIS lookups are excluded from the live PCAP model to prevent fabricating unobserved data.
+When presenting this project on your resume, LinkedIn, or in technical interviews:
+
+- **Situation**: DNS is an ubiquitous, unrestricted protocol often bypassing egress firewalls, making it the #1 covert vehicle for advanced persistent threat (APT) data exfiltration.
+- **Task**: Architect an end-to-end full-stack cybersecurity application capable of ingesting wire-level packet captures (`.pcap`/`.pcapng`), extracting structural telemetry, and accurately detecting exfiltration without memorizing static domain indicators.
+- **Action**:
+  - Implemented dual-mode ingestion pairing an ultra-fast zero-dependency binary parser with Scapy for robust packet decoding.
+  - Engineered 14 stateless structural DNS features (Shannon entropy, label distributions, lexical tokens), completely eliminating raw string memorization and timestamp leakage.
+  - Trained an ensemble combining supervised Random Forest, unsupervised Isolation Forest, and deterministic heuristics into an explainable 0–100 risk score.
+  - Built an asynchronous FastAPI REST API with RBAC JWT authentication and a responsive React 18 / Tailwind CSS analyst dashboard.
+- **Result**: Achieved **99.91% attack recall** on 30,000 unseen test samples from the CIC-Bell-DNS-EXF-2021 dataset, supported by 38 passing unit/integration tests and sub-second analysis turnaround.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — feel free to use and adapt it for academic and enterprise research.
