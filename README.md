@@ -17,7 +17,7 @@
 
 ---
 
-## ⚡ Executive Summary & Key Highlights
+## Executive Summary & Key Highlights
 
 | 🎯 99.91% Attack Recall | 🛡️ Zero Data Leakage | ⚡ Dual-Mode Parser | 🧠 Hybrid Risk Engine |
 | :---: | :---: | :---: | :---: |
