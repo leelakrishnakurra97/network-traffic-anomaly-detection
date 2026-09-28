@@ -19,7 +19,7 @@
 
 ## Executive Summary & Key Highlights
 
-| 🎯 99.91% Attack Recall | 🛡️ Zero Data Leakage | ⚡ Dual-Mode Parser | 🧠 Hybrid Risk Engine |
+|  99.91% Attack Recall | 🛡️ Zero Data Leakage | ⚡ Dual-Mode Parser | 🧠 Hybrid Risk Engine |
 | :---: | :---: | :---: | :---: |
 | Only 10 missed attacks across 11,662 real unseen test payloads | Eliminates raw domains & timestamps to prevent memorization | Ultra-fast native binary PCAP/PCAPNG + Scapy fallback | Fuses Random Forest (55%), Isolation Forest (25%), & Heuristics (20%) |
 
