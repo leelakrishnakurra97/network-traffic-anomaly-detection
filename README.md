@@ -88,7 +88,7 @@ NetSentinel is trained on the benchmark **Canadian Institute for Cybersecurity (
 
 ---
 
-## 🛡️ Feature Engineering & Zero-Memorization Strategy
+##  Feature Engineering & Zero-Memorization Strategy
 
 Standard machine learning models frequently suffer from **memorization bias** when trained on raw domain names (e.g., memorizing `google.com` as benign or `malicious-domain.cc` as attack). NetSentinel uses **14 strictly structural, stateless features** to detect obfuscation and exfiltration patterns regardless of domain name or registrar.
 
