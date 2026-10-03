@@ -76,7 +76,7 @@ flowchart TD
 
 ---
 
-## 🔬 Dataset & Class Distribution
+##  Dataset & Class Distribution
 
 NetSentinel is trained on the benchmark **Canadian Institute for Cybersecurity (CIC) Bell DNS Exfiltration 2021** dataset (`CIC-Bell-DNS-EXF-2021`).
 
