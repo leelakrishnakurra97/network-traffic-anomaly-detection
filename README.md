@@ -144,7 +144,7 @@ Actual Attack                10             11,652          (FN / TP)
 
 ---
 
-## 🧮 Explainable Hybrid Risk Scoring Formula
+##  Explainable Hybrid Risk Scoring Formula
 
 NetSentinel computes a composite threat risk score from three independent defensive tiers:
 
