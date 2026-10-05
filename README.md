@@ -156,7 +156,7 @@ $$\text{Risk Score} = \text{round}\left(100 \times \left[0.55 \cdot P_{\text{RF}
 
 ---
 
-## 💻 Tech Stack & Engineering Architecture
+##  Tech Stack & Engineering Architecture
 
 ```
 Layer                   Technologies
