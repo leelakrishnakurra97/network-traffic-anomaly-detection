@@ -172,7 +172,7 @@ Testing & Quality       Pytest 8.2 (38 unit/integration tests), FastAPI TestClie
 
 ---
 
-## 🚀 Quickstart & Installation
+## Quickstart & Installation
 
 ### Prerequisites
 - **Python 3.10+** (Tested on Python 3.12)
