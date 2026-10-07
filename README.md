@@ -116,7 +116,7 @@ Standard machine learning models frequently suffer from **memorization bias** wh
 
 ---
 
-## 📊 Real Model Benchmarks & Validation Results
+## Real Model Benchmarks & Validation Results
 
 Evaluated on **30,000 unseen test samples** from the canonical test set:
 
