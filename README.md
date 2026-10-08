@@ -205,7 +205,7 @@ Interactive dashboard will be accessible at: `http://localhost:5173`.
 
 ---
 
-## 🔑 Default Demonstration Credentials
+## Default Demonstration Credentials
 
 | Role | Email | Password | Permissions |
 | :--- | :--- | :--- | :--- |
