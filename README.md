@@ -216,7 +216,7 @@ Interactive dashboard will be accessible at: `http://localhost:5173`.
 
 ---
 
-## 🧪 Comprehensive Automated Test Suite
+## Comprehensive Automated Test Suite
 
 Run the full automated test suite containing **38 unit and integration tests**:
 
