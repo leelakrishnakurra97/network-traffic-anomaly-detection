@@ -242,7 +242,7 @@ backend/tests/test_pcap_extractor.py (10 tests) PASSED                    [100%]
 
 ---
 
-## 💼 Career & Interview Highlights (STAR Method)
+## Career & Interview Highlights (STAR Method)
 
 When presenting this project on your resume, LinkedIn, or in technical interviews:
 
