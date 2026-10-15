@@ -257,6 +257,6 @@ When presenting this project on your resume, LinkedIn, or in technical interview
 
 ---
 
-## 📄 License
+##  License
 
 This project is licensed under the **MIT License** — feel free to use and adapt it for academic and enterprise research.
