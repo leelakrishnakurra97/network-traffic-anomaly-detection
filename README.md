@@ -1,21 +1,16 @@
 # NETSENTINEL: Intelligent DNS Traffic Anomaly & Threat Detection System
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.12" />
-  <img src="https://img.shields.io/badge/FastAPI-0.110+-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
-  <img src="https://img.shields.io/badge/React-18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 18" />
-  <img src="https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
-  <img src="https://img.shields.io/badge/scikit--learn-1.4+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="Scikit-Learn" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/Tests-38%20Passed-brightgreen?style=for-the-badge&logo=pytest&logoColor=white" alt="Pytest" />
-  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License" />
-</p>
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=flat-square&logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-18-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.4+-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-38_Passed-brightgreen?style=flat-square&logo=pytest&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
-<p align="center">
-  <strong>An enterprise-grade network security platform and machine learning pipeline engineered to detect DNS data exfiltration, covert tunneling, and algorithmic domain generation from raw packet captures (<code>.pcap</code> and <code>.pcapng</code>).</strong>
-</p>
+**NETSENTINEL** is an intelligent network security platform that combines machine learning and network traffic analysis to detect DNS-based threats, including data exfiltration, covert DNS tunneling, and algorithmically generated domains, from raw packet captures (`.pcap` and `.pcapng`).
 
----
 
 ## Executive Summary & Key Highlights
 
