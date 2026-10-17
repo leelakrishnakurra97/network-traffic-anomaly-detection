@@ -240,22 +240,6 @@ backend/tests/test_pcap_extractor.py (10 tests) PASSED                    [100%]
 ======================= 38 passed, 8 warnings in 9.07s ========================
 ```
 
----
-
-## Career & Interview Highlights (STAR Method)
-
-When presenting this project on your resume, LinkedIn, or in technical interviews:
-
-- **Situation**: DNS is an ubiquitous, unrestricted protocol often bypassing egress firewalls, making it the #1 covert vehicle for advanced persistent threat (APT) data exfiltration.
-- **Task**: Architect an end-to-end full-stack cybersecurity application capable of ingesting wire-level packet captures (`.pcap`/`.pcapng`), extracting structural telemetry, and accurately detecting exfiltration without memorizing static domain indicators.
-- **Action**:
-  - Implemented dual-mode ingestion pairing an ultra-fast zero-dependency binary parser with Scapy for robust packet decoding.
-  - Engineered 14 stateless structural DNS features (Shannon entropy, label distributions, lexical tokens), completely eliminating raw string memorization and timestamp leakage.
-  - Trained an ensemble combining supervised Random Forest, unsupervised Isolation Forest, and deterministic heuristics into an explainable 0–100 risk score.
-  - Built an asynchronous FastAPI REST API with RBAC JWT authentication and a responsive React 18 / Tailwind CSS analyst dashboard.
-- **Result**: Achieved **99.91% attack recall** on 30,000 unseen test samples from the CIC-Bell-DNS-EXF-2021 dataset, supported by 38 passing unit/integration tests and sub-second analysis turnaround.
-
----
 
 ##  License
 
