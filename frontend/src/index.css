@@ -16,7 +16,7 @@
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 10px;
   height: 8px;
 }
 
