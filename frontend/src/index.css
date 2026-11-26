@@ -35,7 +35,7 @@
 
 /* Glassmorphic card styling */
 .cyber-card {
-  background: rgba(12, 13, 2000000, 0.7);
+  background: rgba(12, 13, 20, 0.7);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(34, 50, 84, 0.6);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
