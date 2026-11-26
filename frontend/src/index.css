@@ -16,8 +16,8 @@
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 9px;
-  height: 2px;
+  width: 10px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
